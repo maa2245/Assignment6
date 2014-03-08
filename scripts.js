@@ -8,29 +8,24 @@ console.log ("js load successful")
 function ColumbiaLoaded(UNEMPDATA){
 	
 	console.log(UNEMPDATA);
-
 	
-	var myData = UNEMPDATA.observations; 
+// Now I will feed the google vizualization data into my array
+	var gMathiasTable = new google.visualization.DataTable();	
 
-	//I am trying to construct an array of arrays. 
-	var MathiasList = [];
+	gMathiasTable.addColumn('string', UNEMPDATA.columns[0]);
+	gMathiasTable.addColumn('number', UNEMPDATA.columns[1]);
+	
+	gMathiasTable.addRows(UNEMPDATA.rows);
 
-	var topArray = ["Date", "Value"];
-	MathiasList.push(topArray);
-
-
-	// Now I will feed the google vizualization data into my array
-	var MathiasTable = google.visualization.arrayToDataTable(MathiasList);
-
-	// Now I am going to create options object customize the look of the chart. I will make a title and call it Unemployment since 1980
+		// Now I am going to create options object customize the look of the chart. I will make a title and call it Unemployment since 1980
 
 	var ChartOptions = {
           title: "Unemployment since 1980"
         };
 
 	// Now I am telling google to create a line chart.
-	var myChart = new google.visualization.LineChart(document.getElementById("MathiasDiv"));
-		myChart.draw(MathiasTable, ChartOptions);
+	var gMathiasChart = new google.visualization.LineChart(document.getElementById("MathiasDiv"));
+		gMathiasChart.draw(gMathiasTable, ChartOptions);
 	
 }
 
@@ -39,7 +34,7 @@ function MathiasLoaded(){
 	
 	//Here I am going to load the data I want to use via the get function. Last week, I used a static json file. This week
 	// I am going to use a Google Fusion Table. 
-	$.get("https://www.googleapis.com/fusiontables/v1/query?sql=SELECT+*FROM+1ObMagBpe6gu58ykSgqx9oswHnP4S6ZKdPKqk0Bnm&key=AIzaSyDgXCjc_6-rhgi4hlZ8B38upvpVu8nXd-4", ColumbiaLoaded, "json");
+	$.get("https://www.googleapis.com/fusiontables/v1/query?sql=SELECT+*FROM+1ObMagBpe6gu58ykSgqx9oswHnP4S6ZKdPKqk0Bnm+WHERE+DATE>'1979-12-01'&key=AIzaSyDgXCjc_6-rhgi4hlZ8B38upvpVu8nXd-4", ColumbiaLoaded, "json");
 	
 }
 
