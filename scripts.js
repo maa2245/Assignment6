@@ -19,23 +19,6 @@ function ColumbiaLoaded(UNEMPDATA){
 	MathiasList.push(topArray);
 
 
-// Now I am going to convert my json data to an array 
-	// of arrays using a for loop.
-	for(var i=0; i<myData.length;i++) {
-
-		
-		var MathiasObj = myData[i];
-
-		var MathiasArray = [MathiasObj.date, Number(MathiasObj.value)];
-
-		MathiasList.push(MathiasArray);
-
-
-
-	} // This is the end of my loop
-
-	console.log(MathiasList);
-
 	// Now I will feed the google vizualization data into my array
 	var MathiasTable = google.visualization.arrayToDataTable(MathiasList);
 
