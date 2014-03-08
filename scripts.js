@@ -28,7 +28,7 @@ function ColumbiaLoaded(UNEMPDATA){
           title: "Unemployment since 1980"
         };
 
-	
+	// Now I am telling google to create a line chart.
 	var myChart = new google.visualization.LineChart(document.getElementById("MathiasDiv"));
 		myChart.draw(MathiasTable, ChartOptions);
 	
@@ -37,9 +37,9 @@ function ColumbiaLoaded(UNEMPDATA){
 function MathiasLoaded(){
 	
 	
-	//Here I am going to load the data I want to use via the get function. I will write down the name of the file
-	// the name of the function I am using as callback and then finally the file type.
-	$.get("Uempdata.json", ColumbiaLoaded, "json");
+	//Here I am going to load the data I want to use via the get function. Last week, I used a static json file. This week
+	// I am going to use a Google Fusion Table. 
+	$.get("https://www.googleapis.com/fusiontables/v1/query?sql=SELECT+*FROM+1ObMagBpe6gu58ykSgqx9oswHnP4S6ZKdPKqk0Bnm&key=AIzaSyDgXCjc_6-rhgi4hlZ8B38upvpVu8nXd-4", ColumbiaLoaded, "json");
 	
 }
 
